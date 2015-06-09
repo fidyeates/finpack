@@ -12,17 +12,25 @@ Benchmarks:
 
 Usage
 
-    import finpack
+```python
+import finpack
 
-    @finpack.Compile
-    class TestMessage(finpack.Message):
-        message_id = finpack.uINT_TYPE(0)
-        message_body = finpack.STRING_TYPE(1, 16)
+@finpack.Compile
+class TestMessage(finpack.Message):
+    message_id = finpack.uINT_TYPE(0)
+    message_body = finpack.STRING_TYPE(1, 16)
 
-    packed = TestMessage.pack(1, 'Hello World!')
-    unpacked = TestMessage.unpack(packed)
-    print unpacked
+packed = TestMessage.pack(1, 'Hello World!')
+print packed
+> '\x01\x00\x00\x00Hello World!\x00\x00\x00\x00'
 
-    print TestMessage.unpack_into_dict(packed)
+unpacked = TestMessage.unpack(packed)
+print unpacked
+> (1, 'Hello World!\x00\x00\x00\x00')
 
-    print TestMessage.unpack_inti_namedtuple(packed)
+print TestMessage.unpack_into_dict(packed)
+> {'message_body': 'Hello World!\x00\x00\x00\x00', 'message_id': 1}
+
+print TestMessage.unpack_inti_namedtuple(packed)
+> TestMessage(message_id=1, message_body='Hello World!\x00\x00\x00\x00')
+```

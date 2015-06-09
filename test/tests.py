@@ -7,9 +7,11 @@ class TestMessage(finpack.Message):
     message_body = finpack.STRING_TYPE(1, 16)
 
 packed = TestMessage.pack(1, 'Hello World!')
+print repr(packed)
+
 unpacked = TestMessage.unpack(packed)
 print unpacked
 
 print TestMessage.unpack_into_dict(packed)
 
-print TestMessage.unpack_inti_namedtuple(packed)
+print TestMessage.unpack_into_namedtuple(packed)

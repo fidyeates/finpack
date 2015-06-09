@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name="finpack",
-    version="0.1",
+    version="0.1r1",
     package_dir={'': 'src'},
     packages=['finpack'],
     scripts=[],
@@ -10,9 +10,9 @@ setup(
     package_data={},
 
     # metadata for upload to PyPI
-    author="",
+    author="fin.yeates",
     author_email="",
-    description="",
+    description="Lightweight Serialization Library",
     license="PSF",
     keywords="finpack",
     url="",  # project home page, if any
