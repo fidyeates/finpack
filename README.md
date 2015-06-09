@@ -2,6 +2,10 @@
 
 (Pronounced thinpack) A very lightweight strict-typed message serialization package. 
 
+Benchmarks: 
+
+> todo - but sub-microsecond
+
 Usage
 
     import finpack
