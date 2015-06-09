@@ -1,6 +1,6 @@
 # Project: finpack
 
-(Pronounced thinpack)
+(Pronounced thinpack) A very lightweight strict-typed message serialization package. 
 
 Usage
 
@@ -14,3 +14,7 @@ Usage
     packed = TestMessage.pack(1, 'Hello World!')
     unpacked = TestMessage.unpack(packed)
     print unpacked
+
+    print TestMessage.unpack_into_dict(packed)
+
+    print TestMessage.unpack_inti_namedtuple(packed)
