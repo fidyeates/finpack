@@ -2,6 +2,10 @@
 
 (Pronounced thinpack) A very lightweight strict-typed message serialization package. 
 
+Installation:
+
+    python setup.py install
+
 Benchmarks: 
 
 > todo - but sub-microsecond
