@@ -73,7 +73,7 @@ class uDOUBLE_TYPE(_BASE_TYPE):
     _STYPE = "Q"
 
 
-class STRING_TYPE(_BASE_TYPE):
+class FSTRING_TYPE(_BASE_TYPE):
     _STYPE = "s"
 
     @property
@@ -81,3 +81,6 @@ class STRING_TYPE(_BASE_TYPE):
         if self.length is None:
             raise MessageException("String Type Requires A Length")
         return str(self.length) + "s"
+
+class STRING_TYPE(_BASE_TYPE):
+    _STYPE = "S"

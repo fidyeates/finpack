@@ -10,7 +10,7 @@ __version__ = 0.1
 __author__  = "Fin"
 
 # Stdlib Imports
-import struct
+import finstruct
 from collections import namedtuple
 
 # Third Party Imports
@@ -41,6 +41,12 @@ class Message(object):
         return cls.INTERFACE(*unpacked)
 
     @classmethod
+    def size(cls):
+        if cls.STRUCT is None:
+            return 0
+        return cls.STRUCT.size
+
+    @classmethod
     def write(cls, *out):
         return cls.STRUCT.pack(*out)
 
@@ -59,6 +65,7 @@ class Message(object):
         cls.STRUCT_STRING = cls._ENDIANNESS + Message.generate_struct_string(sorted_attrs)
 
         _struct = struct.Struct(cls.STRUCT_STRING)
+        cls.STRUCT = _struct
         _unpack = _struct.unpack
         _pack = _struct.pack
 
