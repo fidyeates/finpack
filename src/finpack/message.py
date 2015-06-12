@@ -64,7 +64,7 @@ class Message(object):
         sorted_attrs = sorted(map(lambda attr_tup: (attr_tup[1].index, attr_tup[1], attr_tup[0]), attrs.items()))
         cls.STRUCT_STRING = cls._ENDIANNESS + Message.generate_struct_string(sorted_attrs)
 
-        _struct = struct.Struct(cls.STRUCT_STRING)
+        _struct = finstruct.Struct(cls.STRUCT_STRING)
         cls.STRUCT = _struct
         _unpack = _struct.unpack
         _pack = _struct.pack
