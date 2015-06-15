@@ -1058,7 +1058,7 @@ s_pack_internal(PyStructObject *soself, PyObject *args, int offset, char* buf)
                 n = PyString_GET_SIZE(v);
                 if (n > 0) {
                     *res++ = (char)n;
-                    memcpy(res, PyString_AS_STRING(v), n);
+                    //memcpy(res, PyString_AS_STRING(v), n);
                 }
                 buf += n;
                 break;
@@ -1108,7 +1108,7 @@ static PyObject *
 s_pack(PyObject *self, PyObject *args)
 {
     PyStructObject *soself;
-    PyObject *result;
+    PyObject *result = NULL;
 
     /* Validate arguments. */
     soself = (PyStructObject *)self;
@@ -1135,15 +1135,22 @@ s_pack(PyObject *self, PyObject *args)
     }
 
     /* Allocate a new string */
-    result = PyString_FromStringAndSize((char *)NULL, newsize);
-    if (result == NULL)
-        return NULL;
+    //result = PyString_FromStringAndSize((char *)NULL, newsize);
+    char *buf;
+    buf = (char *) malloc(newsize);
+    //if (result == NULL)
+    //    return NULL;
 
     /* Call the guts */
-    if ( s_pack_internal(soself, args, 0, PyString_AS_STRING(result)) != 0 ) {
+    if ( s_pack_internal(soself, args, 0, buf) != 0 ) { //PyString_AS_STRING(result)
         Py_DECREF(result);
         return NULL;
     }
+
+    //return result;
+    result = PyString_FromString(buf);
+    
+    free(buf);
 
     return result;
 }
