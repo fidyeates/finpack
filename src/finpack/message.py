@@ -10,13 +10,17 @@ __version__ = 0.1
 __author__  = "Fin"
 
 # Stdlib Imports
-import finstruct
 from collections import namedtuple
 
 # Third Party Imports
 
 # finpack Imports
 import msg_types
+
+if msg_types.IMPLEMENTATION == "fin":
+    import finstruct
+else:
+    import struct as finstruct
 
 __all__ = ["Message", "Compile"]
 

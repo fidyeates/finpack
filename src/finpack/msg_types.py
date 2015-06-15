@@ -10,11 +10,14 @@ __version__ = 0.1
 __author__  = "Fin"
 
 # Stdlib Imports
+import os
 
 # Third Party Imports
 
 # finpack Imports
 from errors import InterfaceException
+
+IMPLEMENTATION = os.environ.get("FINPACK_BACKEND", "struct")
 
 
 class _BASE_TYPE(object):
@@ -79,8 +82,11 @@ class FSTRING_TYPE(_BASE_TYPE):
     @property
     def STRUCT_STRING(self):
         if self.length is None:
-            raise MessageException("String Type Requires A Length")
+            raise InterfaceException("String Type Requires A Length")
         return str(self.length) + "s"
 
-class STRING_TYPE(_BASE_TYPE):
-    _STYPE = "S"
+if IMPLEMENTATION == "fin":
+    class STRING_TYPE(_BASE_TYPE):
+        _STYPE = "S"
+else:
+    STRING_TYPE = FSTRING_TYPE

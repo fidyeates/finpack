@@ -1,11 +1,12 @@
 from distutils.core import setup, Extension
 from setuptools import setup, find_packages
 
-finstruct = Extension('finstruct', sources=['src/finstruct/finstruct.c'])
+finstruct = Extension('finstruct', sources=['src/finstruct/finstruct-dev.c'])
+#finstruct_dev = Extension('finstruct', sources=['src/finstruct/finstruct-dev.c'])
 
 setup(
     name="finpack",
-    version="0.1r1",
+    version="0.2",
     package_dir={'': 'src'},
     packages=['finpack'],
     scripts=[],
