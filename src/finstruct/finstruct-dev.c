@@ -640,7 +640,7 @@ lp_longlong(char *p, PyObject *v, const formatdef *f)
     if (v == NULL)
         return -1;
     long long x = PyLong_AsLongLong(v);
-    memcpy(&p, &x, sizeof(long long));
+    memcpy(p, &x, sizeof(long long));
     Py_DECREF(v);
     return 0;
 }
@@ -652,7 +652,7 @@ lp_ulonglong(char *p, PyObject *v, const formatdef *f)
     if (v == NULL)
         return -1;
     unsigned long long x = PyLong_AsUnsignedLongLong(v);
-    memcpy(&p, &x, sizeof(unsigned long long));
+    memcpy(p, &x, sizeof(unsigned long long));
     Py_DECREF(v);
     return 0;
 }
@@ -666,7 +666,7 @@ lp_float(char *p, PyObject *v, const formatdef *f)
                 "required argument is not a float");
         return -1;
     }
-    memcpy(&p, &x, sizeof(float));
+    memcpy(p, &x, sizeof(float));
     Py_DECREF(v);
     return 0;
 }
@@ -681,7 +681,7 @@ lp_double(char *p, PyObject *v, const formatdef *f)
         return -1;
     }
     Py_DECREF(v);
-    memcpy(&p, &x, sizeof(double));
+    memcpy(p, &x, sizeof(double));
     return 0;
 }
 
