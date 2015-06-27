@@ -16,11 +16,7 @@ from collections import namedtuple
 
 # finpack Imports
 import msg_types
-
-if msg_types.IMPLEMENTATION == "fin":
-    import finstruct
-else:
-    import struct as finstruct
+import finstruct
 
 __all__ = ["Message", "Compile"]
 

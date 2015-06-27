@@ -17,8 +17,6 @@ import os
 # finpack Imports
 from errors import InterfaceException
 
-IMPLEMENTATION = os.environ.get("FINPACK_BACKEND", "struct")
-
 
 class _BASE_TYPE(object):
     _STYPE = None
@@ -85,8 +83,6 @@ class FSTRING_TYPE(_BASE_TYPE):
             raise InterfaceException("String Type Requires A Length")
         return str(self.length) + "s"
 
-if IMPLEMENTATION == "fin":
-    class STRING_TYPE(_BASE_TYPE):
+
+class STRING_TYPE(_BASE_TYPE):
         _STYPE = "S"
-else:
-    STRING_TYPE = FSTRING_TYPE

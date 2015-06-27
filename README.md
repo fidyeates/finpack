@@ -2,15 +2,23 @@
 
 (Pronounced thinpack) A very lightweight strict-typed message serialization package. 
 
-Installation:
+## Installation
 
-    python setup.py install
+(via PyPi):
 
-Benchmarks: 
+    sudo pip install finpack
 
-> todo - but sub-microsecond
+(via Github):
 
-Usage
+    sudo python setup.py install
+
+## Benchmarks: 
+
+test  | pack | unpack->tuple | unpack->dict | unpack->namedtuple
+------|------|---------------|--------------|-------------------
+3 ints| 0.16us | 0.11us | 1.37us | 0.78us
+
+## Usage
 
 ```python
 import finpack

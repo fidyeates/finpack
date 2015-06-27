@@ -25,7 +25,7 @@ def test_function(name, data, iterations=1000000):
 
 def test_basic():
     print "Basic Data Benchmarks"
-    data_in = "*(1, 2, 3)"
+    data_in = "*(100022004, 100022004, 100022004)"
     data_out = "'%s'" % _pack(100022004, 100022004, 100022004)
     test_function("_pack", data_in)
     test_function("_unpack", data_out)
