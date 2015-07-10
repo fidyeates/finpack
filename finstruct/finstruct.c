@@ -244,13 +244,17 @@ unpack_longlong(const char *p, const formatdef *f)
 static int
 pack_longlong(char *p, PyObject *v, const formatdef *f)
 {
+    int res;
     v = get_pylong(v);
     if (v == NULL)
         return -1;
-    long long x = PyLong_AsLongLong(v);
-    memcpy(p, &x, sizeof(long long));
+    res = _PyLong_AsByteArray((PyLongObject*)v,
+                  (unsigned char *)p,
+                  8,
+                  1, /* little_endian */
+                  1  /* signed */);
     Py_DECREF(v);
-    return 0;
+    return res;
 }
 
 static PyObject *
@@ -270,13 +274,17 @@ unpack_ulonglong(const char *p, const formatdef *f)
 static int
 pack_ulonglong(char *p, PyObject *v, const formatdef *f)
 {
+    int res;
     v = get_pylong(v);
     if (v == NULL)
         return -1;
-    unsigned long long x = PyLong_AsUnsignedLongLong(v);
-    memcpy(p, &x, sizeof(unsigned long long));
+    res = _PyLong_AsByteArray((PyLongObject*)v,
+                  (unsigned char *)p,
+                  8,
+                  1, /* little_endian */
+                  0  /* signed */);
     Py_DECREF(v);
-    return 0;
+    return res;
 }
 
 static PyObject *
@@ -320,9 +328,7 @@ pack_double(char *p, PyObject *v, const formatdef *f)
                 "required argument is not a float");
         return -1;
     }
-    Py_DECREF(v);
-    memcpy(p, &x, sizeof(double));
-    return 0;
+    return _PyFloat_Pack8(x, (unsigned char *)p, 1);
 }
 
 static formatdef format_table[] = {
