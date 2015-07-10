@@ -62,27 +62,21 @@ class uLONG_TYPE(_BASE_TYPE):
     _STYPE = "L"
 
 
+class LONGLONG_TYPE(_BASE_TYPE):
+    _STYPE = "q"
+
+
+class uLONGLONG_TYPE(_BASE_TYPE):
+    _STYPE = "Q"
+
+
 class FLOAT_TYPE(_BASE_TYPE):
     _STYPE = "f"
 
 
 class DOUBLE_TYPE(_BASE_TYPE):
-    _STYPE = "q"
-
-
-class uDOUBLE_TYPE(_BASE_TYPE):
-    _STYPE = "Q"
-
-
-class FSTRING_TYPE(_BASE_TYPE):
-    _STYPE = "s"
-
-    @property
-    def STRUCT_STRING(self):
-        if self.length is None:
-            raise InterfaceException("String Type Requires A Length")
-        return str(self.length) + "s"
+    _STYPE = "d"
 
 
 class STRING_TYPE(_BASE_TYPE):
-        _STYPE = "S"
+        _STYPE = "s"

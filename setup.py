@@ -4,7 +4,7 @@ finstruct = Extension('finstruct', ['finstruct/finstruct.c'])
 
 setup(
     name="finpack",
-    version="0.2r1",
+    version="0.2r2",
     package_dir="",
     packages=['finpack'],
     scripts=[],

@@ -7,7 +7,7 @@ __author__  = "Fin"
 # Stdlib Imports
 import sys
 import unittest
-import struct
+import finstruct
 
 # Third Party Imports
 
@@ -27,22 +27,15 @@ class MulipleTest(finpack.Message):
     uLONG   = finpack.uLONG_TYPE(7)
     FLOAT   = finpack.FLOAT_TYPE(8)
     DOUBLE  = finpack.DOUBLE_TYPE(9)
-    uDOUBLE = finpack.uDOUBLE_TYPE(10)
-    FSTRING = finpack.FSTRING_TYPE(11, 11)
     STRING  = finpack.STRING_TYPE(12)
 
 
 class Test_StringMultiple(unittest.TestCase):
 
     def test_pack_multiple(self):
-        data = (0, 0, 0, 0, 0, 0, 0, 0, 13535, 0, 0, "Hello World", "Niiiii")
+        data = (0, 0, 0, 0, 0, 0, 0, 0, 13535, 0, "Hello World")
         packed = MulipleTest.pack(*data)
-        sys.stderr.write(str(MulipleTest.unpack(packed)))
-        sys.stderr.write('\n'+str(data))
-        sys.stderr.write('\n'+str([packed]))
-        #sys.stderr.write('\n'+str(unpacked))
-
-        sys.stderr.flush()
+        self.assertEquals(MulipleTest.unpack(packed), data)
 
 
 @finpack.Compile
@@ -65,14 +58,10 @@ class Test_IntMessage(unittest.TestCase):
         packed = TestIntMessage.pack(value)
         self.assertEquals(TestIntMessage.unpack_into_namedtuple(packed).value, value)
 
-    def test_pack_int_minint(self):
-        value = -2147483648
-        packed = TestIntMessage.pack(value)
-        self.assertEquals(TestIntMessage.unpack_into_namedtuple(packed).value, value)
-
     def test_pack_int_out_of_range(self):
+        # TODO
         value = 2 ** 32 + 1
-        with self.assertRaises(struct.error):
+        with self.assertRaises(finstruct.error):
             TestIntMessage.pack(value)
 
 

@@ -6,8 +6,8 @@ from random import randint
 @finpack.Compile
 class BenchmarkMessage(finpack.Message):
     id = finpack.uINT_TYPE(0)
-    value1 = finpack.uINT_TYPE(1)
-    value2 = finpack.uINT_TYPE(2)
+    #value1 = finpack.uINT_TYPE(1)
+    #value2 = finpack.uINT_TYPE(2)
 
 _pack = BenchmarkMessage.pack
 _unpack = BenchmarkMessage.unpack
@@ -25,8 +25,8 @@ def test_function(name, data, iterations=1000000):
 
 def test_basic():
     print "Basic Data Benchmarks"
-    data_in = "*(100022004, 100022004, 100022004)"
-    data_out = "'%s'" % _pack(100022004, 100022004, 100022004)
+    data_in = "100022004"  # , 100022004, 100022004)"
+    data_out = "'%s'" % _pack(100022004)  # , 100022004, 100022004)
     test_function("_pack", data_in)
     test_function("_unpack", data_out)
     test_function("_unpack_dict", data_out)

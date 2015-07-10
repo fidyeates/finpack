@@ -18,11 +18,9 @@ class MulipleTest(finpack.Message):
     uLONG   = finpack.uLONG_TYPE(7)
     FLOAT   = finpack.FLOAT_TYPE(8)
     DOUBLE  = finpack.DOUBLE_TYPE(9)
-    uDOUBLE = finpack.uDOUBLE_TYPE(10)
-    FSTRING = finpack.FSTRING_TYPE(11, 11)
     STRING  = finpack.STRING_TYPE(12)
 
-data = (0, 0, 0, 0, 0, 0, 0, 0, 13535, 0, 0, "Hello World", "Niiiii")
+data = (0, 0, 0, 0, 0, 0, 0, 0, 13535, 0, "Hello World")
 packed = MulipleTest.pack(*data)
 
 
