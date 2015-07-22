@@ -29,15 +29,12 @@ class Message(object):
     STRUCT = None
     STRUCT_STRING = None
 
-    def __init__(self, index):
-        self.index = index
+    def __init__(self, *args, **kwargs):
+        print args, kwargs
 
-    #@classmethod
-    def read(cls, raw_string):
-        unpacked = cls.STRUCT.unpack(raw_string)
-        if cls.INTERFACE is None:
-            return unpacked
-        return cls.INTERFACE(*unpacked)
+    @classmethod
+    def new(cls, *args, **kwargs):
+        return cls.INTERFACE(*args, **kwargs)
 
     @classmethod
     def size(cls):
@@ -69,10 +66,11 @@ class Message(object):
         _pack = _struct.pack
 
         # Read Methods
-        #_read = lambda raw_string: _unpack(raw_string)
-        cls.unpack = _unpack  # _read
+        cls.unpack = _unpack
 
         interface = namedtuple(cls.__name__, map(lambda attr_tup: attr_tup[2], sorted_attrs))
+        cls.INTERFACE = interface
+
         _read_into_tuple = lambda raw_string: interface(*_unpack(raw_string))
         cls.unpack_into_namedtuple = staticmethod(_read_into_tuple)
 
@@ -80,10 +78,14 @@ class Message(object):
         _read_into_dict = lambda raw_string: dict(zip(field_names, _unpack(raw_string)))
         cls.unpack_into_dict = staticmethod(_read_into_dict)
 
+        _pack_from_dict = lambda d: _pack(*map(d.__getitem__, field_names))
+        _pack_from_namedtuple = lambda nt: _pack(*nt)
+
         # Write Methods
-        #_write = lambda *out: _pack(*out)
-        cls.pack = _pack  # staticmethod(_write)
+        cls.pack = _pack
         cls.pack_from_string = _pack
+        cls.pack_from_dict = staticmethod(_pack_from_dict)
+        cls.pack_from_namedtuple = staticmethod(_pack_from_namedtuple)
 
 _is_itype = lambda attr_tup: isinstance(attr_tup[1], (msg_types._BASE_TYPE, Message))
 

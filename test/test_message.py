@@ -89,4 +89,5 @@ class Test_StringMessage(unittest.TestCase):
         self.assertEquals(StringTest.unpack_into_namedtuple(packed).message, message)
 
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()

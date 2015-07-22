@@ -16,4 +16,5 @@ __author__  = "Fin"
 # Virtu Imports
 
 
-class InterfaceException(Exception): pass
+class InterfaceException(Exception):
+    pass

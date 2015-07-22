@@ -79,4 +79,4 @@ class DOUBLE_TYPE(_BASE_TYPE):
 
 
 class STRING_TYPE(_BASE_TYPE):
-        _STYPE = "s"
+    _STYPE = "s"

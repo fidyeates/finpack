@@ -30,7 +30,11 @@ class TestIntMessage(finpack.Message):
 
 
 packed = TestIntMessage.pack(0)
-TestIntMessage.unpack_into_namedtuple(packed).value
+nt = TestIntMessage.unpack_into_namedtuple(packed)
+print [nt]
+print [TestIntMessage.pack_from_namedtuple(nt)]
+print [TestIntMessage.pack_from_dict({"value": 1})]
+
 
 value = 2 ** 32 + 1
 TestIntMessage.pack(value)
